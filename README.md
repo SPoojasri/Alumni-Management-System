@@ -103,6 +103,6 @@ Displays all submitted feedback from users.
 
 ## 👩‍💻 Project By
 
-> *Pooja Sri.*  
+> *Pooja Sri.S*  
 > Class Project Submission — 2025  
 > Alumni Management System using PHP & MySQL
