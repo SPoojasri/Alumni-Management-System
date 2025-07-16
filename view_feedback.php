@@ -1,53 +1,112 @@
 <?php
-// Connect to database
+// Connect to DB
 $conn = new mysqli("localhost", "root", "", "alumni_db");
-
-// Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all feedback
-$sql = "SELECT * FROM feedback ORDER BY created_at DESC";
-$result = $conn->query($sql);
+$result = $conn->query("SELECT * FROM feedback ORDER BY submitted_on DESC");
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>All Feedback</title>
+    <meta charset="UTF-8">
+    <title>Alumni Feedback</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 20px auto 0;
+            text-align: center;
+        }
+
+        .back-btn a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+
+        .back-btn a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <h2>📬 Alumni Feedback</h2>
-  <a href="dashboard.php">← Back to Dashboard</a><br><br>
 
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Message</th>
-      <th>Submitted On</th>
-    </tr>
-    <?php
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["id"] . "</td>
-                <td>" . htmlspecialchars($row["name"]) . "</td>
-                <td>" . htmlspecialchars($row["email"]) . "</td>
-                <td>" . nl2br(htmlspecialchars($row["message"])) . "</td>
-                <td>" . $row["created_at"] . "</td>
-              </tr>";
-      }
-    } else {
-      echo "<tr><td colspan='5'>No feedback found.</td></tr>";
-    }
-    ?>
-  </table>
+<div class="container">
+    <h2>📩 Alumni Feedback</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Submitted On</th>
+        </tr>
+
+        <?php while ($row = $result->fetch_assoc()) { ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['name']); ?></td>
+            <td><?php echo htmlspecialchars($row['email']); ?></td>
+            <td><?php echo htmlspecialchars($row['message']); ?></td>
+            <td><?php echo $row['submitted_on']; ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+
+    <div class="back-btn">
+        <a href="dashboard.php">← Back to Dashboard</a>
+    </div>
+</div>
+
 </body>
 </html>
 
-<?php
-$conn->close();
-?>
+<?php $conn->close(); ?>

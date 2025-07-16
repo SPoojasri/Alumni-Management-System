@@ -1,21 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Alumni Feedback Form</title>
+    <meta charset="UTF-8">
+    <title>Submit Feedback</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <h2>📬 Send Us Your Feedback</h2>
-  <form method="POST" action="feedback.php">
-    <label>Name:</label><br>
-    <input type="text" name="name" required><br><br>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+<div class="container">
+    <h2>Submit Your Feedback</h2>
+    <form action="feedback.php" method="post">
+        <label for="name">Your Full Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <label>Message:</label><br>
-    <textarea name="message" rows="5" cols="30" required></textarea><br><br>
+        <label for="email">Your Email Address:</label>
+        <input type="email" id="email" name="email" required>
 
-    <input type="submit" value="Send Feedback">
-  </form>
+        <label for="message">Your Feedback:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+    <a href="dashboard.php" class="back-link">← Back to Dashboard</a>
+</div>
+
 </body>
 </html>
